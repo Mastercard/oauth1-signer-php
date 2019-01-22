@@ -1,0 +1,27 @@
+{
+    "name": "mastercard/oauth1-signer",
+    "description": "Zero dependency library for generating a Mastercard API compliant OAuth signature.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mastercard Worldwide",
+            "email": "APISupport@mastercard.com"
+        }
+    ],
+    "require": {
+        "phpunit/phpunit": "^5.7"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Mastercard\\Developer\\OAuth1Signer\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mastercard\\Developer\\OAuth1Signer\\": ["src", "tests"]
+        }
+    }
+}
