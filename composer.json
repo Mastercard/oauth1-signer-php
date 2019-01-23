@@ -10,18 +10,19 @@
         }
     ],
     "require": {
-        "phpunit/phpunit": "^5.7"
+        "phpunit/phpunit": "^5.7",
+        "ext-openssl": "*"
     },
     "require-dev": {
     },
     "autoload": {
         "psr-4": {
-            "Mastercard\\Developer\\OAuth1Signer\\": "src"
+            "Mastercard\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Mastercard\\Developer\\OAuth1Signer\\": ["src", "tests"]
+            "Mastercard\\": ["src/", "tests/"]
         }
     }
 }
