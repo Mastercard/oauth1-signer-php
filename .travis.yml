@@ -7,4 +7,4 @@ php:
     - '7.2'
     - '7.3'
 before_install: "composer install"
-script: "vendor/bin/phpunit"
+script: "vendor/bin/phpunit --no-configuration ./tests --teamcity"
