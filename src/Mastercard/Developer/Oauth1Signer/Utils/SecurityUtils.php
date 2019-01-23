@@ -11,7 +11,7 @@ class SecurityUtils {
      * Load a RSA key out of a PKCS#12 container.
      * @throws \Exception
      */
-    public function loadPrivateKey($pkcs12KeyFilePath, $signingKeyAlias, $signingKeyPassword) {
+    public static function loadPrivateKey($pkcs12KeyFilePath, $signingKeyAlias, $signingKeyPassword) {
         if (!$keystore = file_get_contents($pkcs12KeyFilePath)) {
             throw new \Exception("Error: Unable to read the keystore file in $$pkcs12KeyFilePath\n");
         }
