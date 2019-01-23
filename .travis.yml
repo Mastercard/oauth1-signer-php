@@ -11,4 +11,4 @@ before_install:
   - "composer install"
   - "composer dump-autoload -o"
 script: 
-  - "vendor/bin/phpunit --configuration ./phpunit.xml ./tests --teamcity"
+  - "vendor/bin/phpunit --configuration ./phpunit.xml --teamcity"
