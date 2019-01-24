@@ -45,7 +45,7 @@ A private key object can be created by calling the `SecurityUtils::loadPrivateKe
 
 ```php
 use Mastercard\Developer\OAuth\Utils\SecurityUtils;
-
+// (...)
 $signingKey = SecurityUtils::loadPrivateKey(
                 '<insert PKCS#12 key file path>',
                 '<insert key alias>', 
@@ -57,7 +57,7 @@ The method that does all the heavy lifting is `OAuth::getAuthorizationHeader`. Y
 
 ```php
 use Mastercard\Developer\OAuth\OAuth;
-
+// (...)
 $consumerKey = '<insert consumer key>';
 $uri = 'https://sandbox.api.mastercard.com/service';
 $method = 'POST';
