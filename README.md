@@ -36,7 +36,7 @@ As part of this set up, you'll receive credentials for your app:
 
 ```shell
 composer require mastercard/oauth1-signer
-composer install
+composer dump-autoload -o
 ```
 
 ### Loading the Signing Key <a name="loading-the-signing-key"></a>
@@ -44,6 +44,8 @@ composer install
 A private key object can be created by calling the `SecurityUtils::loadPrivateKey` function:
 
 ```php
+use Mastercard\Developer\OAuth\Utils\SecurityUtils;
+
 $signingKey = SecurityUtils::loadPrivateKey(
                 '<insert PKCS#12 key file path>',
                 '<insert key alias>', 
@@ -54,6 +56,8 @@ $signingKey = SecurityUtils::loadPrivateKey(
 The method that does all the heavy lifting is `OAuth::getAuthorizationHeader`. You can call into it directly and as long as you provide the correct parameters, it will return a string that you can add into your request's `Authorization` header.
 
 ```php
+use Mastercard\Developer\OAuth\OAuth;
+
 $consumerKey = '<insert consumer key>';
 $uri = 'https://sandbox.api.mastercard.com/service';
 $method = 'POST';
