@@ -1,5 +1,5 @@
 <?php
-namespace Mastercard\Developer\OAuth1Signer\Utils;
+namespace Mastercard\Developer\OAuth\Utils;
 
 /**
  * Utility class.
@@ -13,7 +13,7 @@ class SecurityUtils {
      */
     public static function loadPrivateKey($pkcs12KeyFilePath, $signingKeyAlias, $signingKeyPassword) {
         if (!$keystore = file_get_contents($pkcs12KeyFilePath)) {
-            throw new \Exception("Error: Unable to read the keystore file in $$pkcs12KeyFilePath\n");
+            throw new \Exception('Error: Unable to read the keystore file in ' . $$pkcs12KeyFilePath);
         }
 
         openssl_pkcs12_read($keystore, $certs, $signingKeyPassword);
@@ -21,6 +21,6 @@ class SecurityUtils {
             throw new \Exception('Unable open keystore with provided password');
         }
 
-        return openssl_get_privatekey($certs["pkey"]);
+        return openssl_get_privatekey($certs['pkey']);
     }
 }
