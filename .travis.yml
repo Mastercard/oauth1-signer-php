@@ -8,7 +8,7 @@ php:
   - '7.2'
   - '7.3'
 before_install: 
-  - "composer install"
-  - "composer dump-autoload -o"
+  - "composer --no-plugins --no-scripts install"
+  - "composer --no-plugins --no-scripts dump-autoload -o"
 script: 
   - "vendor/bin/phpunit --configuration ./phpunit.xml --teamcity"
