@@ -3,10 +3,14 @@
     "description": "Zero dependency library for generating a Mastercard API compliant OAuth signature.",
     "type": "library",
     "license": "MIT",
+    "keywords": [
+        "oauth1",
+        "oauth1a",
+        "php"
+    ],
     "authors": [
         {
-            "name": "Mastercard Worldwide",
-            "email": "APISupport@mastercard.com"
+            "name": "Mastercard",
         }
     ],
     "require": {
