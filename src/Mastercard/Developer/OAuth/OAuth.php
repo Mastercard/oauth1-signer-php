@@ -44,10 +44,10 @@ class OAuth {
         $oauthParameters['oauth_signature'] = self::signSignatureBaseString($signatureBaseString, $signingKey);
 
         // Constructs and returns a valid Authorization header as per https://tools.ietf.org/html/rfc5849#section-3.5.1
-        $result = "";
+        $result = '';
         foreach ($oauthParameters as $key => $value) {
             $result .= (strlen($result) == 0 ? 'OAuth ' : ',');
-            $result .=  $key . '="' . $value . '"';
+            $result .=  $key . '="' . rawurlencode($value) . '"';
         }
         return $result;
     }
