@@ -8,15 +8,7 @@ use Mastercard\Developer\OAuth\OAuth;
 /**
  * Utility class for signing RequestInterface objects (see: https://www.php-fig.org/psr/psr-7/)
  */
-class PsrHttpMessageSigner {
-
-    private $consumerKey;
-    private $signingKey;
-
-    public function __construct($consumerKey, $signingKey) {
-        $this->consumerKey = $consumerKey;
-        $this->signingKey = $signingKey;
-    }
+class PsrHttpMessageSigner extends BaseSigner {
 
     public function sign(RequestInterface &$request) {
         $uri = $request->getUri()->__toString();

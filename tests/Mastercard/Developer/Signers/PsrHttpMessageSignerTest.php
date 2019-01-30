@@ -8,7 +8,7 @@ use GuzzleHttp\Psr7\Request; // GuzzleHttp requests are implementing the PSR Req
 
 class PsrHttpMessageSignerTest extends TestCase {
 
-    public function testSign_ShouldAddOAuth1HeaderToRequest_WhenValidInputs() {
+    public function testSign_ShouldAddOAuth1HeaderToPostRequest() {
 
         // GIVEN
         $signingKey = TestUtils::getTestPrivateKey();
@@ -24,10 +24,10 @@ class PsrHttpMessageSignerTest extends TestCase {
         // THEN
         $authorizationHeaderValue = $request->getHeader("Authorization")[0];
         $this->assertNotNull($authorizationHeaderValue);
-        $this->assertEquals(0, strpos($authorizationHeaderValue, "OAuth"));
+        $this->assertEquals(strlen('OAuth '), strpos($authorizationHeaderValue, "oauth_consumer_key"));
     }
 
-    public function testSign_ShouldSupportRequestsWithoutBody() {
+    public function testSign_ShouldAddOAuth1HeaderToGetRequest() {
 
         // GIVEN
         $signingKey = TestUtils::getTestPrivateKey();
