@@ -75,16 +75,56 @@ These classes, provided in the `Mastercard\Developer\Signers\` namespace, will m
 
 Usage briefly described below, but you can also refer to the test namespace for examples. 
 
++ [cURL](#curl)
 + [GuzzleHttp](#guzzlehttp)
+
+#### cURL <a name="curl"></a>
+
+##### POST example
+
+```php
+use Mastercard\Developer\Signers\CurlRequestSigner;
+// ...
+$method = 'POST';
+$uri = 'https://sandbox.api.mastercard.com/service';
+$payload = json_encode(['foo' => 'bår']);
+$headers = array(
+    'Content-Type: application/json',
+    'Content-Length: ' . strlen($payload)
+);
+$handle = curl_init($uri);
+curl_setopt_array($handle, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_CUSTOMREQUEST => $method, CURLOPT_POSTFIELDS => $payload));
+$signer = new CurlRequestSigner($this->consumerKey, $signingKey);
+$signer->sign($handle, $method, $headers, $payload);
+$result = curl_exec($handle);
+curl_close($handle);
+```
+
+##### GET example
+
+```php
+use Mastercard\Developer\Signers\CurlRequestSigner;
+// ...
+$method = 'GET';
+$baseUri = 'https://sandbox.api.mastercard.com/service';
+$queryParams = array('param1' => 'with spaces', 'param2' => 'encoded#symbol');
+$uri = $baseUri . '?' . http_build_query($queryParams);
+$handle = curl_init($uri);
+curl_setopt_array($handle, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_CUSTOMREQUEST => $method));
+$signer = new CurlRequestSigner($this->consumerKey, $signingKey);
+$signer->sign($handle, $method);
+$result = curl_exec($handle);
+curl_close($handle);
+```
 
 #### GuzzleHttp <a name="guzzlehttp"></a>
 ```php
 use GuzzleHttp\Psr7\Request;
 use Mastercard\Developer\Signers\PsrHttpMessageSigner;
 // ...
-$body = '{"foo":"bår"}';
+$payload = '{"foo":"bår"}';
 $headers = ['Content-Type' => 'application/json'];
-$request = new Request('POST', 'https://sandbox.api.mastercard.com/service', $headers, $body);
+$request = new Request('POST', 'https://sandbox.api.mastercard.com/service', $headers, $payload);
 $signer = new PsrHttpMessageSigner($consumerKey, $signingKey);
 $signer.sign($request);
 ```
@@ -96,7 +136,6 @@ It provides generators and library templates for supporting multiple languages a
 
 Generators currently supported:
 + [php](#php)
-
 
 #### php <a name="php"></a>
 
