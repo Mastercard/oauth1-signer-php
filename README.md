@@ -110,7 +110,7 @@ $baseUri = 'https://sandbox.api.mastercard.com/service';
 $queryParams = array('param1' => 'with spaces', 'param2' => 'encoded#symbol');
 $uri = $baseUri . '?' . http_build_query($queryParams);
 $handle = curl_init($uri);
-curl_setopt_array($handle, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_CUSTOMREQUEST => $method));
+curl_setopt_array($handle, array(CURLOPT_RETURNTRANSFER => 1));
 $signer = new CurlRequestSigner($this->consumerKey, $signingKey);
 $signer->sign($handle, $method);
 $result = curl_exec($handle);
