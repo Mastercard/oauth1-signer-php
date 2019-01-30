@@ -97,17 +97,18 @@ It provides generators and library templates for supporting multiple languages a
 Generators currently supported:
 + [php](#php)
 
-See also: [CONFIG OPTIONS for php](https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/php.md).
 
 #### php <a name="php"></a>
 
 ##### OpenAPI Generator
 
+Client libraries can be generated using the following command:
 ```shell
 java -jar openapi-generator-cli.jar generate -i openapi-spec.yaml -g php -o out
 ```
+See also: [CONFIG OPTIONS for php](https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/php.md).
 
-##### Usage of the PsrHttpMessageSigner
+##### Usage of the `PsrHttpMessageSigner`
 
 ```php
 use GuzzleHttp;
