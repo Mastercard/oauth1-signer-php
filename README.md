@@ -94,7 +94,7 @@ $headers = array(
 );
 $handle = curl_init($uri);
 curl_setopt_array($handle, array(CURLOPT_RETURNTRANSFER => 1, CURLOPT_CUSTOMREQUEST => $method, CURLOPT_POSTFIELDS => $payload));
-$signer = new CurlRequestSigner($this->consumerKey, $signingKey);
+$signer = new CurlRequestSigner($consumerKey, $signingKey);
 $signer->sign($handle, $method, $headers, $payload);
 $result = curl_exec($handle);
 curl_close($handle);
@@ -111,7 +111,7 @@ $queryParams = array('param1' => 'with spaces', 'param2' => 'encoded#symbol');
 $uri = $baseUri . '?' . http_build_query($queryParams);
 $handle = curl_init($uri);
 curl_setopt_array($handle, array(CURLOPT_RETURNTRANSFER => 1));
-$signer = new CurlRequestSigner($this->consumerKey, $signingKey);
+$signer = new CurlRequestSigner($consumerKey, $signingKey);
 $signer->sign($handle, $method);
 $result = curl_exec($handle);
 curl_close($handle);
