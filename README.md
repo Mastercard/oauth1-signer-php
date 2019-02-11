@@ -1,8 +1,9 @@
 # oauth1-signer-php
 
-[![Build Status](https://travis-ci.org/Mastercard/oauth1-signer-php.svg?branch=master)](https://travis-ci.org/Mastercard/oauth1-signer-php)
-[![Packagist](https://img.shields.io/packagist/v/mastercard/oauth1-signer.svg)](https://packagist.org/packages/mastercard/oauth1-signer)
-[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://github.com/Mastercard/oauth1-signer-php/blob/master/LICENSE)
+[![](https://travis-ci.org/Mastercard/oauth1-signer-php.svg?branch=master)](https://travis-ci.org/Mastercard/oauth1-signer-php)
+[![](https://sonarcloud.io/api/project_badges/measure?project=Mastercard_oauth1-signer-php&metric=alert_status)](https://sonarcloud.io/dashboard?id=Mastercard_oauth1-signer-php) 
+[![](https://img.shields.io/packagist/v/mastercard/oauth1-signer.svg)](https://packagist.org/packages/mastercard/oauth1-signer)
+[![](https://img.shields.io/badge/license-MIT-yellow.svg)](https://github.com/Mastercard/oauth1-signer-php/blob/master/LICENSE)
 
 ## Table of Contents
 - [Overview](#overview)
