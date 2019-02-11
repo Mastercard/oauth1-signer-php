@@ -32,5 +32,6 @@ after_success:
       -Dsonar.organization=$SONAR_ORGANIZATION_KEY \
       -Dsonar.sources=. \
       -Dsonar.exclusions=**/vendor/**,**/tests/** \
+      -Dsonar.php.coverage.reportPaths=coverage.serialized \
       -Dsonar.host.url=$SONAR_URL \
       -Dsonar.login=$SONAR_TOKEN || echo 'Skipping Sonar Scanner execution'
