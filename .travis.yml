@@ -1,4 +1,6 @@
 language: php
+git:
+  depth: false  # "Shallow clone detected during the analysis"
 matrix:
   fast_finish: true
   include:
