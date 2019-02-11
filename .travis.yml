@@ -30,7 +30,8 @@ after_success:
       -Dsonar.projectName=$SONAR_PROJECT_NAME \
       -Dsonar.projectKey=$SONAR_PROJECT_KEY \
       -Dsonar.organization=$SONAR_ORGANIZATION_KEY \
-      -Dsonar.sources=. \
+      -Dsonar.sources=./src \
+      -Dsonar.tests=./tests \
       -Dsonar.exclusions=**/vendor/**,**/tests/**,**/*.xml \
       -Dsonar.php.tests.reportPath=tests.xml \
       -Dsonar.php.coverage.reportPaths=coverage.xml \
