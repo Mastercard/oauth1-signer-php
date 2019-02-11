@@ -9,23 +9,23 @@ class OAuth {
     /**
      * Creates a Mastercard API compliant OAuth Authorization header.
      * @return string
-     * @throws \Exception
+     * @throws \InvalidArgumentException
      */
     public static function getAuthorizationHeader($uri, $method, $payload, $consumerKey, $signingKey) {
         if (is_null($uri) || !$uri) {
-            throw new \Exception('URI must be set!');
+            throw new \InvalidArgumentException('URI must be set!');
         }
 
         if (is_null($method) || !$method) {
-            throw new \Exception('HTTP method must be set!');
+            throw new \InvalidArgumentException('HTTP method must be set!');
         }
 
         if (is_null($consumerKey) || !$consumerKey) {
-            throw new \Exception('Consumer key must be set!');
+            throw new \InvalidArgumentException('Consumer key must be set!');
         }
 
         if (is_null($signingKey) || !$signingKey) {
-            throw new \Exception('Signing key must be set!');
+            throw new \InvalidArgumentException('Signing key must be set!');
         }
 
         $queryParameters = self::extractQueryParams($uri);
@@ -55,16 +55,16 @@ class OAuth {
     /**
      * Parse query parameters out of the URL. https://tools.ietf.org/html/rfc5849#section-3.4.1.3
      * @return array
-     * @throws \Exception
+     * @throws \InvalidArgumentException
      */
     private static function extractQueryParams($uri) {
         $uriParts = parse_url($uri);
         if (!$uriParts) {
-            throw new \Exception('URI is not valid!');
+            throw new \InvalidArgumentException('URI is not valid!');
         }
 
         if (!array_key_exists('host', $uriParts)) {
-            throw new \Exception('No URI host!');
+            throw new \InvalidArgumentException('No URI host!');
         }
 
         if (!array_key_exists('query', $uriParts)) {
@@ -115,7 +115,7 @@ class OAuth {
         $parameterString = '';
         foreach ($allParameters as $key => $values) {
             asort($values, SORT_NATURAL); // Keys with same name are sorted by their values
-            foreach ($values as $index => $value) {
+            foreach ($values as $value) {
                 $parameterString .= (strlen($parameterString) == 0 ? '' : '&');
                 $parameterString .=  $key . '=' . $value;
             }
@@ -126,12 +126,12 @@ class OAuth {
     /**
      * Normalizes the URL as per https://tools.ietf.org/html/rfc5849#section-3.4.1.2.
      * @return string
-     * @throws \Exception
+     * @throws \InvalidArgumentException
      */
     private static function getBaseUriString($uriString) {
         $uriParts = parse_url($uriString);
         if (!$uriParts) {
-            throw new \Exception('URI is not valid!');
+            throw new \InvalidArgumentException('URI is not valid!');
         }
 
         // Remove query and fragment
@@ -152,8 +152,7 @@ class OAuth {
         if (empty($path)) {
             $path = '/';
         }
-        $normalizedUrl .= $path;
-        return $normalizedUrl;
+        return $normalizedUrl . $path;
     }
 
     /**

@@ -16,6 +16,5 @@ class PsrHttpMessageSigner extends BaseSigner {
         $body = $request->getBody()->__toString();
         $authHeader = OAuth::getAuthorizationHeader($uri, $method, $body , $this->consumerKey, $this->signingKey);
         $request = $request->withHeader(OAuth::$AuthorizationHeaderName, $authHeader);
-        return $request;
     }
 }
