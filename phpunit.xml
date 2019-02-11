@@ -6,7 +6,8 @@
         </testsuite>
     </testsuites>
     <logging>
-        <log type="coverage-php" target="coverage.serialized"/>
+        <log type="coverage-clover" target="coverage.xml"/>
+        <log type="junit" target="tests.xml"/>
     </logging>
     <filter>
     <whitelist processUncoveredFilesFromWhitelist="true">
