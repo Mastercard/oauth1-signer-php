@@ -9,8 +9,9 @@ matrix:
   - php: '7.1'
   - php: '7.2'
   - php: '7.3'
-    env: WITH_SONAR_ANALYSIS=true
-    env: SONAR_SCANNER_VERSION=sonar-scanner-cli-3.3.0.1492
+    env: 
+      - WITH_SONAR_ANALYSIS=true
+      - SONAR_SCANNER_VERSION=sonar-scanner-cli-3.3.0.1492
 before_install: 
   - "composer --no-plugins --no-scripts install"
   - "composer --no-plugins --no-scripts dump-autoload -o"
