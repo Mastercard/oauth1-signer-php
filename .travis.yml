@@ -1,14 +1,32 @@
 language: php
-php:
+matrix:
+  fast_finish: true
+  include:
   # X.Y versions are aliases for recent X.Y.Z releases pre-installed on the build images
-  - '5.6.0'
-  - '5.6'
-  - '7.0'
-  - '7.1'
-  - '7.2'
-  - '7.3'
+  - php: '5.6.0'
+  - php: '5.6'
+  - php: '7.0'
+  - php: '7.1'
+  - php: '7.2'
+  - php: '7.3'
+    env: WITH_SONAR_ANALYSIS=true
+    env: SONAR_SCANNER_VERSION=sonar-scanner-cli-3.3.0.1492
 before_install: 
   - "composer --no-plugins --no-scripts install"
   - "composer --no-plugins --no-scripts dump-autoload -o"
+install:
+  - |
+    test $WITH_SONAR_ANALYSIS \
+       && wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/$SONAR_SCANNER_VERSION.zip \
+       && unzip $SONAR_SCANNER_VERSION.zip || echo 'Skipping Sonar Scanner installation'
 script: 
   - "vendor/bin/phpunit --configuration ./phpunit.xml --teamcity"
+after_success:
+  - |
+    test $WITH_SONAR_ANALYSIS && $SONAR_SCANNER_VERSION/bin/sonar-scanner \
+      -Dsonar.projectName=$SONAR_PROJECT_NAME \
+      -Dsonar.projectKey=$SONAR_PROJECT_KEY \
+      -Dsonar.organization=$SONAR_ORGANIZATION_KEY \
+      -Dsonar.sources=. \
+      -Dsonar.host.url=$SONAR_URL \
+      -Dsonar.login=$SONAR_TOKEN || echo 'Skipping Sonar Scanner execution'
