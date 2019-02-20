@@ -13,7 +13,7 @@ class CurlRequestSignerTest extends TestCase {
         $signingKey = TestUtils::getTestPrivateKey();
         $consumerKey = 'Some key';
         $method = 'POST';
-        $uri = 'http://api.mastercard.com/service';
+        $uri = 'http://httpbin.org/';
         $payload = json_encode(['foo' => 'bår']);
         $headers = array(
             'Content-Type: application/json',
@@ -30,7 +30,7 @@ class CurlRequestSignerTest extends TestCase {
         // WHEN
         $instanceUnderTest = new CurlRequestSigner($consumerKey, $signingKey);
         $instanceUnderTest->sign($handle, $method, $headers, $payload);
-        curl_exec($handle);
+        curl_exec($handle); // There is no way of reading HTTP headers without having the request successfully sent
 
         // THEN
         $headerInfo = curl_getinfo($handle, CURLINFO_HEADER_OUT);
@@ -43,7 +43,7 @@ class CurlRequestSignerTest extends TestCase {
         $signingKey = TestUtils::getTestPrivateKey();
         $consumerKey = 'Some key';
         $method = 'GET';
-        $uri = 'http://api.mastercard.com/service';
+        $uri = 'http://httpbin.org/';
         $handle = curl_init($uri);
         curl_setopt_array($handle, array(
             CURLINFO_HEADER_OUT => 1,
@@ -52,7 +52,7 @@ class CurlRequestSignerTest extends TestCase {
         // WHEN
         $instanceUnderTest = new CurlRequestSigner($consumerKey, $signingKey);
         $instanceUnderTest->sign($handle, $method);
-        curl_exec($handle);
+        curl_exec($handle); // There is no way of reading HTTP headers without having the request successfully sent
 
         // THEN
         $headerInfo = curl_getinfo($handle, CURLINFO_HEADER_OUT);
