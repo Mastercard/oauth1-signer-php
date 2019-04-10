@@ -7,14 +7,15 @@ namespace Mastercard\Developer\OAuth\Utils;
  */
 class AuthenticationUtils {
 
-    private function __construct() {
-    }
+    private function __construct() {}
 
     /**
      * Load a RSA signing key out of a PKCS#12 container.
      */
     public static function loadSigningKey($pkcs12KeyFilePath, $signingKeyAlias, $signingKeyPassword) { //NOSONAR
-        if (!$keystore = file_get_contents($pkcs12KeyFilePath)) {
+        try {
+            $keystore = file_get_contents($pkcs12KeyFilePath);
+        } catch (\Exception $e) {
             throw new \InvalidArgumentException('Error: Unable to read the keystore file in ' . $pkcs12KeyFilePath);
         }
 

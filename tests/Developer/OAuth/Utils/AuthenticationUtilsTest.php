@@ -18,4 +18,32 @@ class AuthenticationUtilsTest extends TestCase {
         // THEN
         $this->assertNotNull($privateKey);
     }
+
+    public function testLoadSigningKey_ShouldThrowInvalidArgumentException_WhenWrongPassword() {
+
+        // THEN
+        $this->expectException(\InvalidArgumentException::class);
+
+        // GIVEN
+        $keyContainerPath = './resources/test_key_container.p12';
+        $keyAlias = 'mykeyalias';
+        $keyPassword = 'Wrong password';
+
+        // WHEN
+        AuthenticationUtils::loadSigningKey($keyContainerPath, $keyAlias, $keyPassword);
+    }
+
+    public function testLoadSigningKey_ShouldThrowInvalidArgumentException_WhenFileDoesNotExists() {
+
+        // THEN
+        $this->expectException(\InvalidArgumentException::class);
+
+        // GIVEN
+        $keyContainerPath = './resources/some file';
+        $keyAlias = 'mykeyalias';
+        $keyPassword = 'Password1';
+
+        // WHEN
+        AuthenticationUtils::loadSigningKey($keyContainerPath, $keyAlias, $keyPassword);
+    }
 }
