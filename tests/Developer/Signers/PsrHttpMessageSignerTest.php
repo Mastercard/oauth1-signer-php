@@ -19,9 +19,10 @@ class PsrHttpMessageSignerTest extends TestCase {
 
         // WHEN
         $instanceUnderTest = new PsrHttpMessageSigner($consumerKey, $signingKey);
-        $instanceUnderTest->sign($request);
+        $outRequest = $instanceUnderTest->sign($request);
 
         // THEN
+        $this->assertNotNull($outRequest);
         $authorizationHeaderValue = $request->getHeader("Authorization")[0];
         $this->assertNotNull($authorizationHeaderValue);
         $this->assertEquals(strlen('OAuth '), strpos($authorizationHeaderValue, "oauth_consumer_key"));
@@ -36,9 +37,10 @@ class PsrHttpMessageSignerTest extends TestCase {
 
         // WHEN
         $instanceUnderTest = new PsrHttpMessageSigner($consumerKey, $signingKey);
-        $instanceUnderTest->sign($request);
+        $outRequest = $instanceUnderTest->sign($request);
 
         // THEN
+        $this->assertNotNull($outRequest);
         $authorizationHeaderValue = $request->getHeader("Authorization")[0];
         $this->assertNotNull($authorizationHeaderValue);
         $this->assertEquals(0, strpos($authorizationHeaderValue, "OAuth"));
