@@ -157,9 +157,9 @@ class OAuthTest extends TestCase {
         $this->assertEquals('WhqqH%2BTU95VgZ~Itpdq78BWb4cE%3D%26o', rawurlencode('WhqqH+TU95VgZ~Itpdq78BWb4cE=&o')); // Tilde stays unescaped
     }
 
-    public function testGetNonce_ShouldHaveLengthOf32() {
+    public function testGetNonce_ShouldHaveLengthOf16() {
         $nonce = self::callGetNonce(array());
-        $this->assertEquals(32, strlen($nonce));
+        $this->assertEquals(16, strlen($nonce));
     }
 
 }

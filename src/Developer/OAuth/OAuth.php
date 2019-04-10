@@ -180,7 +180,7 @@ class OAuth {
      * Generates a random string for replay protection as per https://tools.ietf.org/html/rfc5849#section-3.3.
      * @return string
      */
-    private static function getNonce($length = 32) {
+    private static function getNonce($length = 16) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
