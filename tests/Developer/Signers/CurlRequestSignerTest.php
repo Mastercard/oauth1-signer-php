@@ -10,7 +10,7 @@ class CurlRequestSignerTest extends TestCase {
     public function testSign_ShouldAddOAuth1HeaderToPostRequest() {
 
         // GIVEN
-        $signingKey = TestUtils::getTestPrivateKey();
+        $signingKey = TestUtils::getTestSigningKey();
         $consumerKey = 'Some key';
         $method = 'POST';
         $uri = 'http://httpbin.org/';
@@ -40,7 +40,7 @@ class CurlRequestSignerTest extends TestCase {
     public function testSign_ShouldAddOAuth1HeaderToGetRequest() {
 
         // GIVEN
-        $signingKey = TestUtils::getTestPrivateKey();
+        $signingKey = TestUtils::getTestSigningKey();
         $consumerKey = 'Some key';
         $method = 'GET';
         $uri = 'http://httpbin.org/';

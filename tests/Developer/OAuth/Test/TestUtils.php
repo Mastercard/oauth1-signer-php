@@ -2,7 +2,7 @@
 
 namespace Mastercard\Developer\OAuth\Test;
 
-use Mastercard\Developer\OAuth\Utils\SecurityUtils;
+use Mastercard\Developer\OAuth\Utils\AuthenticationUtils;
 
 class TestUtils
 {
@@ -16,7 +16,7 @@ class TestUtils
         return $method->invokeArgs(null, $args);
     }
 
-    public static function getTestPrivateKey() {
-        return SecurityUtils::loadPrivateKey('./resources/test_key_container.p12','mykeyalias', 'Password1');
+    public static function getTestSigningKey() {
+        return AuthenticationUtils::loadSigningKey('./resources/test_key_container.p12','mykeyalias', 'Password1');
     }
 }

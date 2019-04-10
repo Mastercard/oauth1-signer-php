@@ -11,7 +11,7 @@ class PsrHttpMessageSignerTest extends TestCase {
     public function testSign_ShouldAddOAuth1HeaderToPostRequest() {
 
         // GIVEN
-        $signingKey = TestUtils::getTestPrivateKey();
+        $signingKey = TestUtils::getTestSigningKey();
         $consumerKey = 'Some key';
         $body = '{"foo":"bår"}';
         $headers = ['Content-Type' => 'application/json'];
@@ -30,7 +30,7 @@ class PsrHttpMessageSignerTest extends TestCase {
     public function testSign_ShouldAddOAuth1HeaderToGetRequest() {
 
         // GIVEN
-        $signingKey = TestUtils::getTestPrivateKey();
+        $signingKey = TestUtils::getTestSigningKey();
         $consumerKey = 'Some key';
         $request = new Request('GET', 'https://api.mastercard.com/service');
 
