@@ -11,7 +11,7 @@ class PsrHttpMessageSignerTest extends TestCase {
     public function testSign_ShouldAddOAuth1HeaderToPostRequest() {
 
         // GIVEN
-        $signingKey = TestUtils::getTestPrivateKey();
+        $signingKey = TestUtils::getTestSigningKey();
         $consumerKey = 'Some key';
         $body = '{"foo":"bår"}';
         $headers = ['Content-Type' => 'application/json'];
@@ -19,9 +19,10 @@ class PsrHttpMessageSignerTest extends TestCase {
 
         // WHEN
         $instanceUnderTest = new PsrHttpMessageSigner($consumerKey, $signingKey);
-        $instanceUnderTest->sign($request);
+        $outRequest = $instanceUnderTest->sign($request);
 
         // THEN
+        $this->assertNotNull($outRequest);
         $authorizationHeaderValue = $request->getHeader("Authorization")[0];
         $this->assertNotNull($authorizationHeaderValue);
         $this->assertEquals(strlen('OAuth '), strpos($authorizationHeaderValue, "oauth_consumer_key"));
@@ -30,15 +31,16 @@ class PsrHttpMessageSignerTest extends TestCase {
     public function testSign_ShouldAddOAuth1HeaderToGetRequest() {
 
         // GIVEN
-        $signingKey = TestUtils::getTestPrivateKey();
+        $signingKey = TestUtils::getTestSigningKey();
         $consumerKey = 'Some key';
         $request = new Request('GET', 'https://api.mastercard.com/service');
 
         // WHEN
         $instanceUnderTest = new PsrHttpMessageSigner($consumerKey, $signingKey);
-        $instanceUnderTest->sign($request);
+        $outRequest = $instanceUnderTest->sign($request);
 
         // THEN
+        $this->assertNotNull($outRequest);
         $authorizationHeaderValue = $request->getHeader("Authorization")[0];
         $this->assertNotNull($authorizationHeaderValue);
         $this->assertEquals(0, strpos($authorizationHeaderValue, "OAuth"));

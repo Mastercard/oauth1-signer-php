@@ -44,12 +44,12 @@ composer dump-autoload -o
 
 ### Loading the Signing Key <a name="loading-the-signing-key"></a>
 
-A private key object can be created by calling the `SecurityUtils::loadPrivateKey` function:
+A private key object can be created by calling the `AuthenticationUtils::loadSigningKey` function:
 
 ```php
-use Mastercard\Developer\OAuth\Utils\SecurityUtils;
+use Mastercard\Developer\OAuth\Utils\AuthenticationUtils;
 // ...
-$signingKey = SecurityUtils::loadPrivateKey(
+$signingKey = AuthenticationUtils::loadSigningKey(
                 '<insert PKCS#12 key file path>',
                 '<insert key alias>', 
                 '<insert key password>');
