@@ -23,6 +23,7 @@ class AuthenticationUtilsTest extends TestCase {
 
         // THEN
         $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Failed to open keystore with the provided password!');
 
         // GIVEN
         $keyContainerPath = './resources/test_key_container.p12';
@@ -37,6 +38,7 @@ class AuthenticationUtilsTest extends TestCase {
 
         // THEN
         $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Failed to read the given file: ./resources/some file!');
 
         // GIVEN
         $keyContainerPath = './resources/some file';

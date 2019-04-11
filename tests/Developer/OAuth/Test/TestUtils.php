@@ -6,7 +6,7 @@ use Mastercard\Developer\OAuth\Utils\AuthenticationUtils;
 
 class TestUtils
 {
-    public static function callStatic($className, $functionName, $args) {
+    public static function callPrivateStatic($className, $functionName, $args) {
         if (is_string($args) || is_null($args)) {
             $args = array($args);
         }

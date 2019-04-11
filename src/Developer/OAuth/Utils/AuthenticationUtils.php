@@ -16,12 +16,12 @@ class AuthenticationUtils {
         try {
             $keystore = file_get_contents($pkcs12KeyFilePath);
         } catch (\Exception $e) {
-            throw new \InvalidArgumentException('Error: Unable to read the keystore file in ' . $pkcs12KeyFilePath);
+            throw new \InvalidArgumentException('Failed to read the given file: ' . $pkcs12KeyFilePath . '!', 0, $e);
         }
 
         openssl_pkcs12_read($keystore, $certs, $signingKeyPassword);
         if (is_null($certs)) {
-            throw new \InvalidArgumentException('Unable open keystore with provided password');
+            throw new \InvalidArgumentException('Failed to open keystore with the provided password!');
         }
 
         return openssl_get_privatekey($certs['pkey']);

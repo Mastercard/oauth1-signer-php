@@ -8,31 +8,31 @@ use Mastercard\Developer\OAuth\Test\TestUtils;
 class OAuthTest extends TestCase {
 
     private static function callGetSignatureBaseString($params) {
-        return TestUtils::callStatic('\OAuth', 'getSignatureBaseString', $params);
+        return TestUtils::callPrivateStatic('\OAuth', 'getSignatureBaseString', $params);
     }
 
     private static function callSignSignatureBaseString($params) {
-        return TestUtils::callStatic('\OAuth', 'signSignatureBaseString', $params);
+        return TestUtils::callPrivateStatic('\OAuth', 'signSignatureBaseString', $params);
     }
 
     private static function callGetOAuthParamString($params) {
-        return TestUtils::callStatic('\OAuth', 'getOAuthParamString', $params);
+        return TestUtils::callPrivateStatic('\OAuth', 'getOAuthParamString', $params);
     }
 
     private static function callExtractQueryParams($params) {
-        return TestUtils::callStatic('\OAuth', 'extractQueryParams', $params);
+        return TestUtils::callPrivateStatic('\OAuth', 'extractQueryParams', $params);
     }
 
     private static function callGetBaseUriString($params) {
-        return TestUtils::callStatic('\OAuth', 'getBaseUriString', $params);
+        return TestUtils::callPrivateStatic('\OAuth', 'getBaseUriString', $params);
     }
 
     private static function callGetNonce($params) {
-        return TestUtils::callStatic('\OAuth', 'getNonce', $params);
+        return TestUtils::callPrivateStatic('\OAuth', 'getNonce', $params);
     }
 
     private static function callGetBodyHash($params) {
-        return TestUtils::callStatic('\OAuth', 'getBodyHash', $params);
+        return TestUtils::callPrivateStatic('\OAuth', 'getBodyHash', $params);
     }
 
     public function testExtractQueryParams_ShouldExtractEncodedParams() {

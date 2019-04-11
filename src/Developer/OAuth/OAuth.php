@@ -4,7 +4,7 @@ namespace Mastercard\Developer\OAuth;
 
 class OAuth {
 
-    public static $AuthorizationHeaderName = 'Authorization';
+    const AUTHORIZATION_HEADER_NAME = 'Authorization';
 
     /**
      * Creates a Mastercard API compliant OAuth Authorization header.

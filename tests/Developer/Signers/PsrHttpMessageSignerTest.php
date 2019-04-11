@@ -23,9 +23,9 @@ class PsrHttpMessageSignerTest extends TestCase {
 
         // THEN
         $this->assertNotNull($outRequest);
-        $authorizationHeaderValue = $request->getHeader("Authorization")[0];
+        $authorizationHeaderValue = $request->getHeader('Authorization')[0];
         $this->assertNotNull($authorizationHeaderValue);
-        $this->assertEquals(strlen('OAuth '), strpos($authorizationHeaderValue, "oauth_consumer_key"));
+        $this->assertEquals(strlen('OAuth '), strpos($authorizationHeaderValue, 'oauth_consumer_key'));
     }
 
     public function testSign_ShouldAddOAuth1HeaderToGetRequest() {
@@ -41,8 +41,8 @@ class PsrHttpMessageSignerTest extends TestCase {
 
         // THEN
         $this->assertNotNull($outRequest);
-        $authorizationHeaderValue = $request->getHeader("Authorization")[0];
+        $authorizationHeaderValue = $request->getHeader('Authorization')[0];
         $this->assertNotNull($authorizationHeaderValue);
-        $this->assertEquals(0, strpos($authorizationHeaderValue, "OAuth"));
+        $this->assertEquals(0, strpos($authorizationHeaderValue, 'OAuth'));
     }
 }
