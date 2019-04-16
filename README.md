@@ -39,7 +39,6 @@ As part of this set up, you'll receive credentials for your app:
 
 ```shell
 composer require mastercard/oauth1-signer
-composer dump-autoload -o
 ```
 
 ### Loading the Signing Key <a name="loading-the-signing-key"></a>
