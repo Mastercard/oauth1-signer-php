@@ -19,6 +19,6 @@ class SecurityUtilsTest extends TestCase {
         $privateKey = SecurityUtils::loadPrivateKey($keyContainerPath, $keyAlias, $keyPassword);
 
         // THEN
-        $this->assertNotNull($privateKey);
+        $this->assertNotEmpty($privateKey);
     }
 }

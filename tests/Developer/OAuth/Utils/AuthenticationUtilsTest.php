@@ -16,7 +16,7 @@ class AuthenticationUtilsTest extends TestCase {
         $privateKey = AuthenticationUtils::loadSigningKey($keyContainerPath, $keyAlias, $keyPassword);
 
         // THEN
-        $this->assertNotNull($privateKey);
+        $this->assertNotEmpty($privateKey);
     }
 
     public function testLoadSigningKey_ShouldThrowInvalidArgumentException_WhenWrongPassword() {

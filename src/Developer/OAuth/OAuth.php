@@ -12,19 +12,19 @@ class OAuth {
      * @throws \InvalidArgumentException
      */
     public static function getAuthorizationHeader($uri, $method, $payload, $consumerKey, $signingKey) {
-        if (is_null($uri) || !$uri) {
+        if (empty($uri)) {
             throw new \InvalidArgumentException('URI must be set!');
         }
 
-        if (is_null($method) || !$method) {
+        if (empty($method)) {
             throw new \InvalidArgumentException('HTTP method must be set!');
         }
 
-        if (is_null($consumerKey) || !$consumerKey) {
+        if (empty($consumerKey)) {
             throw new \InvalidArgumentException('Consumer key must be set!');
         }
 
-        if (is_null($signingKey) || !$signingKey) {
+        if (empty($signingKey)) {
             throw new \InvalidArgumentException('Signing key must be set!');
         }
 
