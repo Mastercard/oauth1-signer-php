@@ -156,6 +156,7 @@ See also:
 ```php
 use GuzzleHttp;
 use OpenAPI\Client\Api\ServiceApi;
+use OpenAPI\Client\Configuration
 use Mastercard\Developer\Signers\PsrHttpMessageSigner;
 // ...
 $stack = new GuzzleHttp\HandlerStack();
@@ -168,5 +169,3 @@ $config->setHost('https://sandbox.api.mastercard.com');
 $serviceApi = new ServiceApi($client, $config);
 // ...
 ```
-
-
