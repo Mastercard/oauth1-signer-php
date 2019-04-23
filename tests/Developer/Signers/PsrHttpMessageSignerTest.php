@@ -23,6 +23,7 @@ class PsrHttpMessageSignerTest extends TestCase {
 
         // THEN
         $this->assertNotEmpty($outRequest);
+        $this->assertSame($outRequest, $request);
         $authorizationHeaderValue = $request->getHeader('Authorization')[0];
         $this->assertNotEmpty($authorizationHeaderValue);
         $this->assertEquals(strlen('OAuth '), strpos($authorizationHeaderValue, 'oauth_consumer_key'));
@@ -41,6 +42,7 @@ class PsrHttpMessageSignerTest extends TestCase {
 
         // THEN
         $this->assertNotEmpty($outRequest);
+        $this->assertSame($outRequest, $request);
         $authorizationHeaderValue = $request->getHeader('Authorization')[0];
         $this->assertNotEmpty($authorizationHeaderValue);
         $this->assertEquals(0, strpos($authorizationHeaderValue, 'OAuth'));
