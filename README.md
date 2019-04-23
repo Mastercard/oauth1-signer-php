@@ -134,7 +134,7 @@ $signer.sign($request);
 [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) generates API client libraries from [OpenAPI Specs](https://github.com/OAI/OpenAPI-Specification). 
 It provides generators and library templates for supporting multiple languages and frameworks.
 
-This library will provide you with some classes you can use when configuring your API client. These classes will take care of adding the correct `Authorization` header before sending the request.
+This project provides you with classes you can use when configuring your API client. These classes will take care of adding the correct `Authorization` header before sending the request.
 
 Generators currently supported:
 + [php](#php)
