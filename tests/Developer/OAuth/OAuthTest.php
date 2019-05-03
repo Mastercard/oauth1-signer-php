@@ -35,21 +35,94 @@ class OAuthTest extends TestCase {
         return TestUtils::callPrivateStatic('\OAuth', 'getBodyHash', $params);
     }
 
-    public function testExtractQueryParams_ShouldExtractEncodedParams() {
-        $queryParams = self::callExtractQueryParams('https://sandbox.api.mastercard.com?param1=plus+value&param2=colon:value&param3=a space~');
-        $this->assertEquals(3, sizeof($queryParams));
-        $this->assertTrue(array('plus%2Bvalue') === $queryParams['param1']);
-        $this->assertTrue(array('colon%3Avalue') === $queryParams['param2']);
-        $this->assertTrue(array('a%20space~') === $queryParams['param3']);
-    }
-
     public function testExtractQueryParams_ShouldSupportDuplicateKeysAndEmptyValues() {
-        $queryParams = self::callExtractQueryParams('https://sandbox.api.mastercard.com/audiences/v1/getcountries?offset=0&offset=1&length=10&empty&odd=');
+
+        // GIVEN
+        $uri = 'https://sandbox.api.mastercard.com/audiences/v1/getcountries?offset=0&offset=1&length=10&empty&odd=';
+
+        // WHEN
+        $queryParams = self::callExtractQueryParams($uri);
+
+        // THEN
         $this->assertEquals(4, sizeof($queryParams));
         $this->assertTrue(array('10') === $queryParams['length']);
         $this->assertTrue(array('0', '1') === $queryParams['offset']);
         $this->assertTrue(array('') === $queryParams['empty']);
         $this->assertTrue(array('') === $queryParams['odd']);
+    }
+
+    public function testExtractQueryParams_ShouldSupportRfcExample() {
+
+        // GIVEN
+        $uri = 'https://example.com/request?b5=%3D%253D&a3=a&c%40=&a2=r%20b'; // See: https://tools.ietf.org/html/rfc5849#section-3.4.1.3.1
+
+        // WHEN
+        $queryParams = self::callExtractQueryParams($uri);
+
+        // THEN
+        $this->assertEquals(4, sizeof($queryParams));
+        $this->assertTrue(array('%3D%253D') === $queryParams['b5']);
+        $this->assertTrue(array('a') === $queryParams['a3']);
+        $this->assertTrue(array('') === $queryParams['c%40']);
+        $this->assertTrue(array('r%20b') === $queryParams['a2']);
+    }
+
+    public function testExtractQueryParams_ShouldNotEncodeParams_WhenUriStringWithDecodedParams() {
+
+        // GIVEN
+        $uri = 'https://example.com/request?colon=:&plus=+&comma=,';
+
+        // WHEN
+        $queryParams = self::callExtractQueryParams($uri);
+
+        // THEN
+        $this->assertEquals(3, sizeof($queryParams));
+        $this->assertTrue(array(':') === $queryParams['colon']);
+        $this->assertTrue(array('+') === $queryParams['plus']);
+        $this->assertTrue(array(',') === $queryParams['comma']);
+    }
+
+    public function testExtractQueryParams_ShouldEncodeParams_WhenUriStringWithEncodedParams() {
+
+        // GIVEN
+        $uri = 'https://example.com/request?colon=%3A&plus=%2B&comma=%2C';
+
+        // WHEN
+        $queryParams = self::callExtractQueryParams($uri);
+
+        // THEN
+        $this->assertEquals(3, sizeof($queryParams));
+        $this->assertTrue(array('%3A') === $queryParams['colon']);
+        $this->assertTrue(array('%2B') === $queryParams['plus']);
+        $this->assertTrue(array('%2C') === $queryParams['comma']);
+    }
+
+    public function testParameterEncoding_ShouldCreateExpectedSignatureBaseString_WhenQueryParamsEncodedInUri() {
+
+        // GIVEN
+        $uri = 'https://example.com/?param=token1%3Atoken2';
+
+        // WHEN
+        $queryParams = self::callExtractQueryParams($uri);
+        $paramString = self::callGetOAuthParamString(array($queryParams, array()));
+        $baseString = self::callGetSignatureBaseString(array('https://example.com', 'GET', $paramString));
+
+        // THEN
+        $this->assertEquals('GET&https%3A%2F%2Fexample.com&param%3Dtoken1%253Atoken2', $baseString);
+    }
+
+    public function testParameterEncoding_ShouldCreateExpectedSignatureBaseString_WhenQueryParamsNotEncodedInUri() {
+
+        // GIVEN
+        $uri = 'https://example.com/?param=token1:token2';
+
+        // WHEN
+        $queryParams = self::callExtractQueryParams($uri);
+        $paramString = self::callGetOAuthParamString(array($queryParams, array()));
+        $baseString = self::callGetSignatureBaseString(array('https://example.com', 'GET', $paramString));
+
+        // THEN
+        $this->assertEquals('GET&https%3A%2F%2Fexample.com&param%3Dtoken1%3Atoken2', $baseString);
     }
 
     public function testGetBodyHash() {

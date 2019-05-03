@@ -71,17 +71,21 @@ class OAuth {
             return array();
         }
 
+        $rawQueryString = $uriParts['query'];
+        $decodedQueryString = rawurldecode($rawQueryString);
+        $mustEncode = $decodedQueryString != $rawQueryString;
+
         $queryParameters = [];
-        $rawParams = explode('&', $uriParts['query']);
-        foreach ($rawParams as $key => $value) {
-            if (empty($value)) {
+        $rawParams = explode('&', $rawQueryString);
+        foreach ($rawParams as $index => $pair) {
+            if (empty($pair)) {
                 continue;
             }
-            $keyValue = explode('=', $value);
-            $key = sizeof($keyValue) >= 1 ? $keyValue[0] : $value;
-            $value = sizeof($keyValue) >= 2 ? $keyValue[1] : '';
-            $encodedKey = rawurlencode($key);
-            $encodedValue = rawurlencode($value);
+            $index = strpos($pair, '=');
+            $key = rawurldecode($index > 0 ? substr($pair, 0, $index) : $pair);
+            $value = ($index > 0 && strlen($pair) > $index + 1) ? rawurldecode(substr($pair, $index + 1)) : '';
+            $encodedKey =  $mustEncode ? rawurlencode($key) : $key;
+            $encodedValue = $mustEncode ? rawurlencode($value) : $value;
             if (!array_key_exists($encodedKey, $queryParameters)) {
                 $queryParameters[$encodedKey] = array();
             }
