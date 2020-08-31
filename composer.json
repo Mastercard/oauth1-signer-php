@@ -4,6 +4,8 @@
     "type": "library",
     "license": "MIT",
     "keywords": [
+        "openapi",
+        "mastercard",
         "oauth1",
         "oauth1a",
         "php"
