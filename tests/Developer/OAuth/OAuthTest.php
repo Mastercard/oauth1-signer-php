@@ -45,10 +45,10 @@ class OAuthTest extends TestCase {
 
         // THEN
         $this->assertEquals(4, sizeof($queryParams));
-        $this->assertTrue(array('10') === $queryParams['length']);
-        $this->assertTrue(array('0', '1') === $queryParams['offset']);
-        $this->assertTrue(array('') === $queryParams['empty']);
-        $this->assertTrue(array('') === $queryParams['odd']);
+        $this->assertSame(array('10'), $queryParams['length']);
+        $this->assertSame(array('0', '1'), $queryParams['offset']);
+        $this->assertSame(array(''), $queryParams['empty']);
+        $this->assertSame(array(''), $queryParams['odd']);
     }
 
     public function testExtractQueryParams_ShouldSupportRfcExample() {
@@ -61,10 +61,10 @@ class OAuthTest extends TestCase {
 
         // THEN
         $this->assertEquals(4, sizeof($queryParams));
-        $this->assertTrue(array('%3D%253D') === $queryParams['b5']);
-        $this->assertTrue(array('a') === $queryParams['a3']);
-        $this->assertTrue(array('') === $queryParams['c%40']);
-        $this->assertTrue(array('r%20b') === $queryParams['a2']);
+        $this->assertSame(array('%3D%253D'), $queryParams['b5']);
+        $this->assertSame(array('a'), $queryParams['a3']);
+        $this->assertSame(array(''), $queryParams['c%40']);
+        $this->assertSame(array('r%20b'), $queryParams['a2']);
     }
 
     public function testExtractQueryParams_ShouldNotEncodeParams_WhenUriStringWithDecodedParams() {
@@ -77,9 +77,9 @@ class OAuthTest extends TestCase {
 
         // THEN
         $this->assertEquals(3, sizeof($queryParams));
-        $this->assertTrue(array(':') === $queryParams['colon']);
-        $this->assertTrue(array('+') === $queryParams['plus']);
-        $this->assertTrue(array(',') === $queryParams['comma']);
+        $this->assertSame(array(':'), $queryParams['colon']);
+        $this->assertSame(array('+'), $queryParams['plus']);
+        $this->assertSame(array(','), $queryParams['comma']);
     }
 
     public function testExtractQueryParams_ShouldEncodeParams_WhenUriStringWithEncodedParams() {
@@ -92,9 +92,9 @@ class OAuthTest extends TestCase {
 
         // THEN
         $this->assertEquals(3, sizeof($queryParams));
-        $this->assertTrue(array('%3A') === $queryParams['colon']);
-        $this->assertTrue(array('%2B') === $queryParams['plus']);
-        $this->assertTrue(array('%2C') === $queryParams['comma']);
+        $this->assertSame(array('%3A'), $queryParams['colon']);
+        $this->assertSame(array('%2B'), $queryParams['plus']);
+        $this->assertSame(array('%2C'), $queryParams['comma']);
     }
 
     public function testParameterEncoding_ShouldCreateExpectedSignatureBaseString_WhenQueryParamsEncodedInUri() {
