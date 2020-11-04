@@ -7,7 +7,9 @@ namespace Mastercard\Developer\OAuth\Utils;
  */
 class AuthenticationUtils {
 
-    private function __construct() {}
+    private function __construct() {
+        // This class can't be instantiated
+    }
 
     /**
      * Load a RSA signing key out of a PKCS#12 container.

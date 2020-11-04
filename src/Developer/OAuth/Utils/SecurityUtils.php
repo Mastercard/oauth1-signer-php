@@ -9,7 +9,9 @@ namespace Mastercard\Developer\OAuth\Utils;
  */
 class SecurityUtils {
 
-    private function __construct() {}
+    private function __construct() {
+        // This class can't be instantiated
+    }
 
     /**
      * @deprecated
