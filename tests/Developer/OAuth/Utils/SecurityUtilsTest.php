@@ -2,11 +2,28 @@
 namespace Mastercard\Developer\OAuth\Utils;
 
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 
 /**
  * @deprecated
  */
 class SecurityUtilsTest extends TestCase {
+
+    public function testConstruct_ShouldBePrivate() {
+        // GIVEN
+        $class = new ReflectionClass('Mastercard\Developer\OAuth\Utils\SecurityUtils');
+        $constructor = $class->getConstructor();
+
+        // WHEN
+        $isPrivate = $constructor->isPrivate();
+
+        // THEN
+        $this->assertTrue($isPrivate);
+
+        // COVERAGE
+        $constructor->setAccessible(true);
+        $constructor->invoke($class->newInstanceWithoutConstructor());
+    }
 
     public function testLoadPrivateKey_ShouldReturnKey() {
 
