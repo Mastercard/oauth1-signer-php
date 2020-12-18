@@ -19,6 +19,12 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: '11'
+        
+    - name: Install PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 7.4
+        coverage: xdebug
 
     - name: Install dependencies
       run: | 
