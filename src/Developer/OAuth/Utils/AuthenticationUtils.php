@@ -18,7 +18,7 @@ class AuthenticationUtils {
         try {
             $keystore = file_get_contents($pkcs12KeyFilePath);
         } catch (\Exception $e) {
-            throw new \InvalidArgumentException('Failed to read the given file: ' . $pkcs12KeyFilePath . '!', 0, $e);
+            throw new \InvalidArgumentException('Failed to read the given file: ' . $pkcs12KeyFilePath, 0, $e);
         }
 
         openssl_pkcs12_read($keystore, $certs, $signingKeyPassword);

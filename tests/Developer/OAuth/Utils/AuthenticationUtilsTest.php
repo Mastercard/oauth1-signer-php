@@ -55,7 +55,7 @@ class AuthenticationUtilsTest extends TestCase {
 
         // THEN
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Failed to read the given file: ./resources/some file!');
+        $this->expectExceptionMessage('Failed to read the given file: ./resources/some file');
 
         // GIVEN
         $keyContainerPath = './resources/some file';
