@@ -49,7 +49,7 @@ A private key object can be created by calling the `AuthenticationUtils::loadSig
 
 ```php
 use Mastercard\Developer\OAuth\Utils\AuthenticationUtils;
-// ...
+// …
 $signingKey = AuthenticationUtils::loadSigningKey(
                 '<insert PKCS#12 key file path>',
                 '<insert key alias>', 
@@ -61,7 +61,7 @@ The method that does all the heavy lifting is `OAuth::getAuthorizationHeader`. Y
 
 ```php
 use Mastercard\Developer\OAuth\OAuth;
-// ...
+// …
 $consumerKey = '<insert consumer key>';
 $uri = 'https://sandbox.api.mastercard.com/service';
 $method = 'POST';
@@ -86,7 +86,7 @@ Usage briefly described below, but you can also refer to the test namespace for 
 
 ```php
 use Mastercard\Developer\Signers\CurlRequestSigner;
-// ...
+// …
 $method = 'POST';
 $uri = 'https://sandbox.api.mastercard.com/service';
 $payload = json_encode(['foo' => 'bår']);
@@ -106,7 +106,7 @@ curl_close($handle);
 
 ```php
 use Mastercard\Developer\Signers\CurlRequestSigner;
-// ...
+// …
 $method = 'GET';
 $baseUri = 'https://sandbox.api.mastercard.com/service';
 $queryParams = array('param1' => 'with spaces', 'param2' => 'encoded#symbol');
@@ -123,7 +123,7 @@ curl_close($handle);
 ```php
 use GuzzleHttp\Psr7\Request;
 use Mastercard\Developer\Signers\PsrHttpMessageSigner;
-// ...
+// …
 $payload = '{"foo":"bår"}';
 $headers = ['Content-Type' => 'application/json'];
 $request = new Request('POST', 'https://sandbox.api.mastercard.com/service', $headers, $payload);
@@ -147,10 +147,10 @@ Generators currently supported:
 
 Client libraries can be generated using the following command:
 ```shell
-java -jar openapi-generator-cli.jar generate -i openapi-spec.yaml -g php -o out
+openapi-generator-cli generate -i openapi-spec.yaml -g php -o out
 ```
 See also: 
-* [OpenAPI Generator (executable)](https://mvnrepository.com/artifact/org.openapitools/openapi-generator-cli)
+* [OpenAPI Generator CLI Installation](https://openapi-generator.tech/docs/installation/)
 * [CONFIG OPTIONS for php](https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/php.md)
 
 ##### Usage of the `PsrHttpMessageSigner`
@@ -160,7 +160,7 @@ use GuzzleHttp;
 use OpenAPI\Client\Api\ServiceApi;
 use OpenAPI\Client\Configuration
 use Mastercard\Developer\Signers\PsrHttpMessageSigner;
-// ...
+// …
 $stack = new GuzzleHttp\HandlerStack();
 $stack->setHandler(new GuzzleHttp\Handler\CurlHandler());
 $stack->push(GuzzleHttp\Middleware::mapRequest([new PsrHttpMessageSigner($consumerKey, $signingKey), 'sign']));
@@ -169,5 +169,5 @@ $client = new GuzzleHttp\Client($options);
 $config = new Configuration();
 $config->setHost('https://sandbox.api.mastercard.com');
 $serviceApi = new ServiceApi($client, $config);
-// ...
+// …
 ```
