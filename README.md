@@ -1,7 +1,7 @@
 # oauth1-signer-php
 [![](https://developer.mastercard.com/_/_/src/global/assets/svg/mcdev-logo-dark.svg)](https://developer.mastercard.com/)
 
-[![maintenance-status](https://img.shields.io/badge/maintenance-deprecated-red.svg)](https://github.com/Mastercard/.github)
+[![maintenance-status](https://img.shields.io/badge/maintenance-deprecated-red.svg)](https://github.com/Mastercard/.github/blob/main/profile/README.md#deprecation)
 [![](https://sonarcloud.io/api/project_badges/measure?project=Mastercard_oauth1-signer-php&metric=alert_status)](https://sonarcloud.io/dashboard?id=Mastercard_oauth1-signer-php)
 [![](https://img.shields.io/packagist/v/mastercard/oauth1-signer.svg)](https://packagist.org/packages/mastercard/oauth1-signer)
 [![](https://img.shields.io/badge/license-MIT-yellow.svg)](https://github.com/Mastercard/oauth1-signer-php/blob/master/LICENSE)
